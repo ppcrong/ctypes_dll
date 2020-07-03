@@ -42,3 +42,72 @@ size_t test_struct_array(struct bounding_box_s **ppBoxes, size_t boxes_len)
     (*ppBoxes)[1] = box2;
     return boxes_len;
 }
+
+size_t test_struct_array2(struct test_result_s** ppResults, size_t results_len)
+{
+    // struct bounding_box_s box1 = {
+    //     .x1 = 10,
+    //     .y1 = 10,
+    //     .x2 = 10,
+    //     .y2 = 10,
+    //     .score = 10,
+    //     .class_num = 10
+    // };
+    // struct bounding_box_s box2 = {
+    //     .x1 = 20,
+    //     .y1 = 20,
+    //     .x2 = 20,
+    //     .y2 = 20,
+    //     .score = 20,
+    //     .class_num = 20
+    // };
+    // struct bounding_box_s box3 = {
+    //     .x1 = 30,
+    //     .y1 = 30,
+    //     .x2 = 30,
+    //     .y2 = 30,
+    //     .score = 30,
+    //     .class_num = 30
+    // };
+
+    // struct bounding_box_s boxes1[3] = {box1, box2, box3};
+    struct test_result_s res1 = {
+        .class_count = 10,
+        .box_count = 10,
+    };
+    // struct bounding_box_s boxes2[3] = {box1, box2, box3};
+    struct test_result_s res2 = {
+        .class_count = 20,
+        .box_count = 20,
+    };
+    // struct bounding_box_s boxes3[3] = {box1, box2, box3};
+    struct test_result_s res3 = {
+        .class_count = 30,
+        .box_count = 30,
+    };
+    (*ppResults)[0] = res1;
+    (*ppResults)[1] = res2;
+    (*ppResults)[2] = res3;
+    return results_len;
+}
+
+/**
+ * reference: https://chrisheydrick.com/2016/02/06/passing-a-ctypes-array-of-struct-from-python-to-dll/
+ */
+void fillonestruct(struct structtest *t)
+{
+    t->x = 'A';
+    t->y = 1234;
+    t->z = 5678;
+}
+
+void fillmultiplestruct(struct structtest *t, size_t n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        t->x = (char)((int)'A' + i);
+        t->y = i;
+        t->z = i;
+        t++;
+    }
+}

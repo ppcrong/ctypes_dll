@@ -20,6 +20,23 @@ struct bounding_box_s
     int32_t class_num; // class # (of many) with highest probability
 };
 
+struct test_result_s
+{
+    uint32_t class_count;           // total class count
+    uint32_t box_count;             // boxes of all classes
+    struct bounding_box_s boxes[1]; // box_count
+};
+
+struct structtest
+{
+    char x;
+    uint32_t y;
+    long z;
+};
+
 WINDOWS_DLL_DEFINE int test_value(int *pValue);
 WINDOWS_DLL_DEFINE void test_buf(void *buf);
 WINDOWS_DLL_DEFINE size_t test_struct_array(struct bounding_box_s **ppBoxes, size_t boxes_len);
+WINDOWS_DLL_DEFINE size_t test_struct_array2(struct test_result_s **ppResults, size_t results_len);
+WINDOWS_DLL_DEFINE void fillonestruct(struct structtest *t);
+WINDOWS_DLL_DEFINE void fillmultiplestruct(struct structtest *t, size_t n);
