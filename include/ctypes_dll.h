@@ -27,11 +27,29 @@ struct test_result_s
     struct bounding_box_s boxes[1]; // box_count
 };
 
+/**
+ * reference: https://chrisheydrick.com/2016/02/06/passing-a-ctypes-array-of-struct-from-python-to-dll/
+ */
 struct structtest
 {
     char x;
     uint32_t y;
     long z;
+};
+
+/**
+ * reference: https://stackoverflow.com/questions/8392203/dynamic-arrays-and-structures-in-structures-in-python
+ */
+struct _rows
+{
+    int cols_count;
+    char **cols;
+};
+
+struct _unit
+{
+    int rows_count;
+    struct _rows *rows;
 };
 
 WINDOWS_DLL_DEFINE int test_value(int *pValue);
@@ -40,3 +58,4 @@ WINDOWS_DLL_DEFINE size_t test_struct_array(struct bounding_box_s **ppBoxes, siz
 WINDOWS_DLL_DEFINE size_t test_struct_array2(struct test_result_s **ppResults, size_t results_len);
 WINDOWS_DLL_DEFINE void fillonestruct(struct structtest *t);
 WINDOWS_DLL_DEFINE void fillmultiplestruct(struct structtest *t, size_t n);
+WINDOWS_DLL_DEFINE int my_func(struct _unit *param);

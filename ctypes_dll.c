@@ -43,7 +43,7 @@ size_t test_struct_array(struct bounding_box_s **ppBoxes, size_t boxes_len)
     return boxes_len;
 }
 
-size_t test_struct_array2(struct test_result_s** ppResults, size_t results_len)
+size_t test_struct_array2(struct test_result_s **ppResults, size_t results_len)
 {
     // struct bounding_box_s box1 = {
     //     .x1 = 10,
@@ -110,4 +110,16 @@ void fillmultiplestruct(struct structtest *t, size_t n)
         t->z = i;
         t++;
     }
+}
+
+/**
+ * reference: https://stackoverflow.com/questions/8392203/dynamic-arrays-and-structures-in-structures-in-python
+ */
+int my_func(struct _unit *param)
+{
+    int i, j;
+    for (i = 0; i < param->rows_count; i++)
+        for (j = 0; j < param->rows[i].cols_count; j++)
+            printf("%d,%d = %s\n", i, j, param->rows[i].cols[j]);
+    return 0;
 }
